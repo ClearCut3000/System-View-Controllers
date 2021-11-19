@@ -84,7 +84,8 @@ let mailComposer = MFMailComposeViewController()
     mailComposer.setToRecipients(["nikitin.nikolay.v@gmail.com"])
     mailComposer.setSubject("Ошибка \(Date())")
     mailComposer.setMessageBody("The main question of life, the universe and all that.", isHTML: false)
-//  TODO: -  mailComposer.addAttachmentData(<#T##attachment: Data##Data#>, mimeType: <#T##String#>, fileName: <#T##String#>)
+    let imageData: NSData = (imageView.image!.pngData() as NSData?)!
+    mailComposer.addAttachmentData(imageData as Data, mimeType: "image/png", fileName: "imageName.png")
     present(mailComposer, animated: true)
   }
 
@@ -104,7 +105,8 @@ extension ViewController: UINavigationControllerDelegate {}
 
 // MARK: - MFMailComposeViewControllerDelegat
 extension ViewController: MFMailComposeViewControllerDelegate {
-  private func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, eroor: Error?){
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
+
     dismiss(animated: true)
   }
 }
